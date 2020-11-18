@@ -10,6 +10,7 @@ import HomePage from './Pages/core/HomePage';
 import LoginPage from './Pages/auth/LoginPage';
 import RegisterPage from './Pages/auth/RegisterPage';
 import ConfirmAuth from './Pages/auth/ConfirmAuth';
+import ForgotPwd from './Pages/auth/ForgotPwd';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/login" exact component={LoginPage} />
         <Route path="/register" exact component={RegisterPage} />
         <Route path="/confirmRegister" exact component={ConfirmAuth} />
+        <Route path="/forgot/password" exact component={ForgotPwd} />
       </Switch>
     </div>
   );

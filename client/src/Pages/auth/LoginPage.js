@@ -88,27 +88,7 @@ const LoginPage = ({ history }) => {
             >
               Login with Google
             </Button>
-
-            <div className="d-flex row justify-content-around">
-              <div>
-                <div className="form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="materialLoginFormRemember"
-                  />
-                  <label
-                    className="form-check-label"
-                    for="materialLoginFormRemember"
-                  >
-                    Remember me
-                  </label>
-                </div>
-              </div>
-              <div>
-                <span>Forgot password?</span>
-              </div>
-            </div>
+                <Link to='/forgot/password' className='float-right text-danger'>Forgot password?</Link>
             <div className="d-flex row justify-content-around mt-3">
               <p>
                 Not a member?
