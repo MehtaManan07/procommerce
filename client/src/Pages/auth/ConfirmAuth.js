@@ -30,7 +30,6 @@ const ConfirmAuth = ({ history }) => {
         const idTokenResult = await user.getIdTokenResult();
         dispatch(authLogin(user,{name,email,password}));
         history.push('/');
-        console.log(idTokenResult, user);
       }
     } catch (error) {
       console.log(error);

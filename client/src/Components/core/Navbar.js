@@ -16,11 +16,10 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const history = useHistory();
+  
   const handleClick = (e) => {
     setCurrent({ current: e.key });
   };
-
-  console.log(auth)
 
   const logout = () => {
     firebase.auth().signOut();

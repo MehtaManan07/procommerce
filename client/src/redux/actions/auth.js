@@ -9,7 +9,7 @@ export const authLogin = (user,values) => async (dispatch) => {
       values,
       { headers: { authtoken: idtokenResult.token } }
     );
-    console.log(res)
+    
     dispatch({
       type: 'LOGGED_IN_USER',
       payload: { user: res.data.data },
@@ -27,7 +27,7 @@ export const actualLogin = (user) => async (dispatch) => {
     {},
       { headers: { authtoken: idtokenResult.token } }
     );
-    console.log(res)
+    
     dispatch({
       type: 'LOGGED_IN_USER',
       payload: { user: res.data.data },
