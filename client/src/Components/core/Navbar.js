@@ -43,7 +43,6 @@ const Navbar = () => {
       </Menu.Item>
     </>
   );
-  console.log(auth);
 
   const authLinks = (
     <SubMenu className='float-right' icon={<UserOutlined />} title="Dashboard">

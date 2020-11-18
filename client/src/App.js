@@ -11,6 +11,7 @@ import LoginPage from './Pages/auth/LoginPage';
 import RegisterPage from './Pages/auth/RegisterPage';
 import ConfirmAuth from './Pages/auth/ConfirmAuth';
 import ForgotPwd from './Pages/auth/ForgotPwd';
+import GuestRoute from './Components/core/GuestRoute';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,14 +27,14 @@ const App = () => {
   }, []);
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
       <Navbar />
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/login" exact component={LoginPage} />
-        <Route path="/register" exact component={RegisterPage} />
-        <Route path="/confirmRegister" exact component={ConfirmAuth} />
-        <Route path="/forgot/password" exact component={ForgotPwd} />
+        <GuestRoute path="/login" exact component={LoginPage} />
+        <GuestRoute path="/register" exact component={RegisterPage} />
+        <GuestRoute path="/confirmRegister" exact component={ConfirmAuth} />
+        <GuestRoute path="/forgot/password" exact component={ForgotPwd} />
       </Switch>
     </div>
   );
