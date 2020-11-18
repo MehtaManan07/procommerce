@@ -61,6 +61,7 @@ const ConfirmAuth = ({ history }) => {
               placeholder="Email"
               className="form-control mb-2"
               autoFocus
+              readOnly
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}

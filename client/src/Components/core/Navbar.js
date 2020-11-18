@@ -16,7 +16,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const history = useHistory();
-  
+
   const handleClick = (e) => {
     setCurrent({ current: e.key });
   };
@@ -46,9 +46,15 @@ const Navbar = () => {
   );
 
   const authLinks = (
-    <SubMenu className="float-right" icon={<UserOutlined />} title="Dashboard">
+    <SubMenu
+      className="float-right"
+      icon={<UserOutlined />}
+      title={`${auth && auth.user.name.split(' ')[0]}`}
+    >
       <Menu.ItemGroup title="something">
-        <Menu.Item key="setting:3">Option 3</Menu.Item>
+        <Menu.Item key="setting:3">
+          <Link to="/user/dashboard">Dashboard</Link>
+        </Menu.Item>
         <Menu.Item icon={<UserSwitchOutlined />} onClick={logout}>
           Logout
         </Menu.Item>
