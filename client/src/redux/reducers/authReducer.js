@@ -1,8 +1,4 @@
-const initialState = {
-
-}
-
-export default (state = initialState, { type, payload }) => {
+export default (state = null, { type, payload }) => {
     switch (type) {
 
     case 'LOGGED_IN_USER':
