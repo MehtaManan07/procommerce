@@ -1,12 +1,11 @@
 export default (state = null, { type, payload }) => {
-    switch (type) {
-
+  switch (type) {
     case 'LOGGED_IN_USER':
-        return payload
+      return payload;
     case 'LOGOUT_USER':
-        return payload
+      return payload;
 
     default:
-        return state
-    }
-}
+      return state;
+  }
+};

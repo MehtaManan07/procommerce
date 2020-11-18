@@ -4,7 +4,7 @@ import { auth, googleAuthProvider } from '../../firebase';
 import { Button } from 'antd';
 import { MailOutlined, GoogleOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { authLogin } from '../../redux/actions/auth';
+import { actualLogin } from '../../redux/actions/auth';
 import { Link } from 'react-router-dom';
 
 const LoginPage = ({ history }) => {
@@ -16,7 +16,7 @@ const LoginPage = ({ history }) => {
   const googleLogin = async (e) => {
     e.preventDefault();
     const result = await auth.signInWithPopup(googleAuthProvider);
-    dispatch(authLogin(result.user));
+    dispatch(actualLogin(result.user));
     history.push('/');
   };
 
@@ -25,11 +25,11 @@ const LoginPage = ({ history }) => {
     setLoading(true);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
-      dispatch(authLogin(result.user));
+      dispatch(actualLogin(result.user));
       history.push('/');
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      console.log(error.code.split('/')[1]);
+      toast.error(`Invalid credentials`);
       setLoading(false);
     }
   };

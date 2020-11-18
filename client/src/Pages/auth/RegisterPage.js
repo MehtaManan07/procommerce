@@ -5,12 +5,11 @@ import { auth } from '../../firebase';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
-  console.log(process.env.REACT_APP_SIGNUP_REDIRECT_URL)
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       await auth.sendSignInLinkToEmail(email, {
-        url: 'http://localhost:3000/confirmRegister',
+        url: process.env.REACT_APP_SIGNUP_REDIRECT_URL,
         handleCodeInApp: true,
       });
       toast.success(`Email sent to ${email}`)

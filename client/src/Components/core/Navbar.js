@@ -20,11 +20,13 @@ const Navbar = () => {
     setCurrent({ current: e.key });
   };
 
+  console.log(auth)
+
   const logout = () => {
     firebase.auth().signOut();
     dispatch({
       type: 'LOGOUT_USER',
-      payload: {},
+      payload: null,
     });
     history.push('/login');
   };
@@ -45,7 +47,7 @@ const Navbar = () => {
   );
 
   const authLinks = (
-    <SubMenu className='float-right' icon={<UserOutlined />} title="Dashboard">
+    <SubMenu className="float-right" icon={<UserOutlined />} title="Dashboard">
       <Menu.ItemGroup title="something">
         <Menu.Item key="setting:3">Option 3</Menu.Item>
         <Menu.Item icon={<UserSwitchOutlined />} onClick={logout}>
@@ -56,7 +58,12 @@ const Navbar = () => {
   );
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <Menu
+      onClick={handleClick}
+      theme="dark"
+      selectedKeys={[current]}
+      mode="horizontal"
+    >
       <Menu.Item key="mail" icon={<AppstoreOutlined />}>
         <Link to="/">Home</Link>
       </Menu.Item>

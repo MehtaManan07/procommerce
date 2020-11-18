@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { Route, Switch } from 'react-router-dom';
 import { auth } from './firebase';
 import { useDispatch } from 'react-redux';
-import { authLogin } from './redux/actions/auth';
+import { actualLogin } from './redux/actions/auth';
 import Navbar from './Components/core/Navbar';
 import HomePage from './Pages/core/HomePage';
 import LoginPage from './Pages/auth/LoginPage';
@@ -18,7 +18,8 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        dispatch(authLogin(user));
+        console.log(user)
+        dispatch(actualLogin(user));
       }
     });
     //cleanup
@@ -31,8 +32,8 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <GuestRoute path="/login" exact component={LoginPage} />
-        <GuestRoute path="/register" exact component={RegisterPage} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/register" exact component={RegisterPage} />
         <GuestRoute path="/confirmRegister" exact component={ConfirmAuth} />
         <GuestRoute path="/forgot/password" exact component={ForgotPwd} />
       </Switch>
