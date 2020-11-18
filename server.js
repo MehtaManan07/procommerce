@@ -3,13 +3,14 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const rateLimit = require('express-rate-limit');
-// const ErrorResponse = require('./server/utils/ErrorResponse');
+const cors = require('cors')
+const ErrorResponse = require('./server/middlewares/ErrorResponse');
 
 const app = express();
-dotenv.config({ path: './server/config/config.env' });
+dotenv.config({ path: './server/config/.env' });
 
 const connectDB = require('./server/config/db'); // load database
-// const errorHandler = require('./server/middlewares/errorHandler');
+const errorHandler = require('./server/middlewares/errorHandler');
 
 // 1) Global MIDDLEWARES
 if (process.env.NODE_ENV === 'development') {
@@ -17,26 +18,26 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const limiter = rateLimit({
-  max: 90,
+  max: 190,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour',
 });
 
 app.use('/api', limiter);
-app.use(express.json());
+app.use(express.json({ limit: '2mb' }));
+app.use(cors())
 
 connectDB();
 
 // 3) ROUTES
-app.use('/',(req,res) => {
-    res.json({ boi: 'Yo boi' })
-})
+app.use('/api/v1/auth', require('./server/routes/authRoutes'));
+
 
 app.all('*', (req, res, next) => {
   next(new ErrorResponse(` Can't find ${req.originalUrl} on this server`, 404));
 });
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
