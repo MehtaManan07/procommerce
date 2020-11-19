@@ -53,7 +53,7 @@ const Navbar = () => {
     >
       <Menu.ItemGroup title="something">
         <Menu.Item key="setting:3">
-          <Link to="/user/dashboard">Dashboard</Link>
+          <Link to={`/${auth && auth.user.role}/dashboard`}>Dashboard</Link>
         </Menu.Item>
         <Menu.Item icon={<UserSwitchOutlined />} onClick={logout}>
           Logout

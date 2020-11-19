@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { actualLogin } from './redux/actions/auth';
 import GuestRoute from './Components/core/GuestRoute';
 import PrivateRoute from './Components/core/PrivateRoute';
+import AdminRoute from './Components/core/AdminRoute';
 import Navbar from './Components/core/Navbar';
 import HomePage from './Pages/core/HomePage';
 import LoginPage from './Pages/auth/LoginPage';
@@ -18,6 +19,7 @@ import ChangePwd from './Pages/user/ChangePwd';
 import WishList from './Pages/user/Wishlist';
 import MyOrders from './Pages/user/MyOrders';
 import PersonalInfo from './Pages/user/PersonalInfo';
+import AdminDashboard from './Pages/admin/AdminDashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,11 +43,12 @@ const App = () => {
         <Route path="/register" exact component={RegisterPage} />
         <GuestRoute path="/confirmRegister" exact component={ConfirmAuth} />
         <GuestRoute path="/forgot/password" exact component={ForgotPwd} />
-        <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
-        <PrivateRoute path='/user/password' exact component={ChangePwd} />
-        <PrivateRoute path='/user/wishlist' exact component={WishList} />
-        <PrivateRoute path='/user/orders' exact component={MyOrders} />
-        <PrivateRoute path='/user/info' exact component={PersonalInfo} />
+        <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
+        <PrivateRoute path="/user/password" exact component={ChangePwd} />
+        <PrivateRoute path="/user/wishlist" exact component={WishList} />
+        <PrivateRoute path="/user/orders" exact component={MyOrders} />
+        <PrivateRoute path="/user/info" exact component={PersonalInfo} />
+        <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
       </Switch>
     </div>
   );
