@@ -28,8 +28,8 @@ const Slider = () => {
           }
         >
           <Menu.ItemGroup key="g1">
+            <Menu.Item onClick={() => history.push('/user/info')} key="2">Personal Info</Menu.Item>
             <Menu.Item onClick={() => history.push('/user/password')} key="1">Password</Menu.Item>
-            <Menu.Item key="2">Personal Info</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Orders">

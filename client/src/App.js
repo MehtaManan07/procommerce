@@ -17,6 +17,7 @@ import UserDashboard from './Pages/user/UserDashboard';
 import ChangePwd from './Pages/user/ChangePwd';
 import WishList from './Pages/user/Wishlist';
 import MyOrders from './Pages/user/MyOrders';
+import PersonalInfo from './Pages/user/PersonalInfo';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const App = () => {
         <PrivateRoute path='/user/password' exact component={ChangePwd} />
         <PrivateRoute path='/user/wishlist' exact component={WishList} />
         <PrivateRoute path='/user/orders' exact component={MyOrders} />
+        <PrivateRoute path='/user/info' exact component={PersonalInfo} />
       </Switch>
     </div>
   );

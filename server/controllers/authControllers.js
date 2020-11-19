@@ -16,6 +16,9 @@ exports.signup = asyncHandler(async (req, res, next) => {
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const provider = req.user.firebase.sign_in_provider;
+  const identities = req.user.firebase.identities
+  console.log(Object.keys(identities).length)
+  console.log(provider)
   const user = await User.findOne({ email: req.user.email });
   if (!user) {
     if (provider === 'password') {
