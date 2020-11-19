@@ -29,6 +29,13 @@ exports.getMe = asyncHandler(async (req, res, next) => {
   sendTokenResponse(200, user, res, req);
 });
 
+
+exports.logout = asyncHandler(async (req, res) => {
+  res.clearCookie('procommerce')
+  res.status(200).json({ success: true });
+});
+
+
 const sendTokenResponse = (statusCode, user, res, req) => {
   const token = req.headers.authtoken;
   const cookieOptions = {

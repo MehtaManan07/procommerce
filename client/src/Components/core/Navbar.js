@@ -7,7 +7,7 @@ import {
   UserSwitchOutlined,
 } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
-import firebase from 'firebase';
+import { logoutUser } from '../../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
@@ -21,12 +21,8 @@ const Navbar = () => {
     setCurrent({ current: e.key });
   };
 
-  const logout = () => {
-    firebase.auth().signOut();
-    dispatch({
-      type: 'LOGOUT_USER',
-      payload: null,
-    });
+  const logout = async () => {
+    dispatch(logoutUser());
     history.push('/login');
   };
 
