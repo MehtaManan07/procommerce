@@ -14,8 +14,8 @@ const Slider = () => {
       <Menu
         onClick={handleClick}
         style={{ width: 256, borderColor: 'grey', height: '100vh' }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultSelectedKeys={['0771']}
+        defaultOpenKeys={['sub1','sub2','sub4']}
         mode="inline"
       >
         <SubMenu
@@ -28,6 +28,7 @@ const Slider = () => {
           }
         >
           <Menu.ItemGroup key="g1">
+            <Menu.Item onClick={() => history.push('/user/dashboard')} key="0771">Dashboard</Menu.Item>
             <Menu.Item onClick={() => history.push('/user/info')} key="2">Personal Info</Menu.Item>
             <Menu.Item onClick={() => history.push('/user/password')} key="1">Password</Menu.Item>
           </Menu.ItemGroup>
