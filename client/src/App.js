@@ -14,6 +14,9 @@ import RegisterPage from './Pages/auth/RegisterPage';
 import ConfirmAuth from './Pages/auth/ConfirmAuth';
 import ForgotPwd from './Pages/auth/ForgotPwd';
 import UserDashboard from './Pages/user/UserDashboard';
+import ChangePwd from './Pages/user/ChangePwd';
+import WishList from './Pages/user/Wishlist';
+import MyOrders from './Pages/user/MyOrders';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +41,9 @@ const App = () => {
         <GuestRoute path="/confirmRegister" exact component={ConfirmAuth} />
         <GuestRoute path="/forgot/password" exact component={ForgotPwd} />
         <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
+        <PrivateRoute path='/user/password' exact component={ChangePwd} />
+        <PrivateRoute path='/user/wishlist' exact component={WishList} />
+        <PrivateRoute path='/user/orders' exact component={MyOrders} />
       </Switch>
     </div>
   );
