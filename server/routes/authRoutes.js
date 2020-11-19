@@ -10,7 +10,7 @@ router.post('/login', authCheck, authController.signup);
 router.post('/me', authCheck, authController.getMe);
 
 // All routes from this middlewares are available to logged in admin only
-router.use(authorize('admin'));
+// router.use(authorize('admin'));
 
 
 module.exports = router;

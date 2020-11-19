@@ -8,34 +8,42 @@ exports.signup = asyncHandler(async (req, res, next) => {
     email: req.body.email,
     photo: req.user.picture && req.user.picture,
   });
-  res.status(201).json({
-    success: true,
-    data: newUser,
-  });
+  sendTokenResponse(201, newUser, res, req);
 });
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const provider = req.user.firebase.sign_in_provider;
-  const identities = req.user.firebase.identities
-  console.log(Object.keys(identities).length)
-  console.log(provider)
+  const identities = req.user.firebase.identities;
   const user = await User.findOne({ email: req.user.email });
   if (!user) {
     if (provider === 'password') {
-     return next(new ErrorResponse(`Invalid credentials`, 401));
+      return next(new ErrorResponse(`Invalid credentials`, 401));
     }
     const newUser = await User.create({
       name: req.user.name,
       email: req.user.email,
       photo: req.user.picture && req.user.picture,
     });
-    res.status(201).json({
-      success: true,
-      data: newUser,
-    });
+    sendTokenResponse(201, newUser, res, req);
   }
-  res.status(200).json({
+  sendTokenResponse(200, user, res, req);
+});
+
+const sendTokenResponse = (statusCode, user, res, req) => {
+  const token = req.headers.authtoken;
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('procommerce', token, cookieOptions)
+  res.status(statusCode).json({
     success: true,
+    token,
     data: user,
   });
-});
+};

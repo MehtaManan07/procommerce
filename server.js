@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const rateLimit = require('express-rate-limit');
-const cors = require('cors')
+const cookieParser = require('cookie-parser')
+
 const ErrorResponse = require('./server/middlewares/ErrorResponse');
 
 const app = express();
@@ -25,13 +26,12 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 app.use(express.json({ limit: '2mb' }));
-app.use(cors())
-
+app.use(cookieParser())
 connectDB();
 
 // 3) ROUTES
 app.use('/api/v1/auth', require('./server/routes/authRoutes'));
-
+app.use('/api/v1/category', require('./server/routes/categoryRoutes'));
 
 app.all('*', (req, res, next) => {
   next(new ErrorResponse(` Can't find ${req.originalUrl} on this server`, 404));
