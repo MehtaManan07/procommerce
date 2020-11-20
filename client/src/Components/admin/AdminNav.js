@@ -1,59 +1,75 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Avatar, Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import {
+  AppstoreOutlined,
+  AlignCenterOutlined,
+  BarChartOutlined,
+  MinusOutlined,
+  ScissorOutlined,
+} from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
+
 const AdminNav = () => {
   const history = useHistory();
-    const handleClick = e => {
-        // e.preventDefault();
-    }
-    return (
-      <Menu
-        onClick={handleClick}
-        style={{ width: 256, borderColor: 'grey', height: '100vh' }}
-        defaultSelectedKeys={['0771']}
-        defaultOpenKeys={['sub1','sub2','sub4']}
-        mode="inline"
+  const handleClick = (e) => {
+    // e.preventDefault();
+  };
+  return (
+    <Menu
+      onClick={handleClick}
+      style={{ width: 256, borderColor: 'grey', height: '100vh' }}
+      defaultSelectedKeys={['0771']}
+      defaultOpenKeys={['sub1', 'sub2', 'sub4', 'sub3']}
+      mode="inline"
+    >
+      <Menu.Item onClick={() => history.push('/admin/dashboard')} key="0771">
+        Dashboard
+      </Menu.Item>
+      <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Orders">
+        <Menu.Item icon={<BarChartOutlined />} onClick={() => history.push('/admin/orders/analytics')} key="5">
+          Analytics
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/orders/all')} key="6">
+          All Orders
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="sub3" icon={<AppstoreOutlined />} title="Categories">
+        <Menu.Item icon={<BarChartOutlined />} onClick={() => history.push('/admin/category/analytics')} key="5">
+          Analytics
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/category')} key="6">
+          Categories
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/category/sub')} key="6">
+         Sub Categories
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu
+        key="sub4"
+        title={
+          <span>
+            <AlignCenterOutlined />
+            <span>Products</span>
+          </span>
+        }
       >
-        <SubMenu
-          key="sub1"
-          title={
-            <span>
-             <Avatar icon={<UserOutlined />} />
-              <span> Profile</span>
-            </span>
-          }
-        >
-          <Menu.ItemGroup key="g1">
-            <Menu.Item onClick={() => history.push('/user/dashboard')} key="0771">Dashboard</Menu.Item>
-            <Menu.Item onClick={() => history.push('/user/info')} key="2">Personal Info</Menu.Item>
-            <Menu.Item onClick={() => history.push('/user/password')} key="1">Password</Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Orders">
-          <Menu.Item onClick={() => history.push('/user/orders')} key="5">My Orders</Menu.Item>
-          <Menu.Item onClick={() => history.push('/user/wishlist')} key="6">WishList</Menu.Item>
-        </SubMenu>
-        <SubMenu
-          key="sub4"
-          title={
-            <span>
-              <SettingOutlined />
-              <span>Navigation Three</span>
-            </span>
-          }
-        >
-          <Menu.Item key="9">Option 9</Menu.Item>
-          <Menu.Item key="10">Option 10</Menu.Item>
-          <Menu.Item key="11">Option 11</Menu.Item>
-          <Menu.Item key="12">Option 12</Menu.Item>
-        </SubMenu>
-      </Menu>
-    );
-  
-}
+        <Menu.Item icon={<BarChartOutlined />} key="12">Analytics</Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="9">All products</Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="10">Create Product</Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="11">Best sellers</Menu.Item>
+      </SubMenu>
+      <Menu.Item
+        icon={<ScissorOutlined />}
+        onClick={() => history.push('/admin/coupons')}
+        key="0771"
+      >
+        Coupons
+      </Menu.Item>
+    </Menu>
+  );
+};
 
-export default AdminNav
+export default AdminNav;
