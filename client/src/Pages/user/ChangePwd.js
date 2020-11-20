@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import UserNav from '../../Components/user/UserNav';
+import DashboardLayout from '../../Components/core/DashboardLayout';
 import { auth } from '../../firebase';
 
 const ChangePwd = () => {
@@ -28,50 +28,43 @@ const ChangePwd = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2.8">
-          <UserNav />
+    <DashboardLayout>
+      {loading ? (
+        <h3 className="mt-3 text-center ml-3"> LOADING </h3>
+      ) : (
+        <h3 className="mt-3 text-center ml-3"> UPDATE PASSWORD </h3>
+      )}
+      <form>
+        <div className="form-group">
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="New Password"
+          />
         </div>
-        <div className="col-md-6 mt-5">
-          {loading ? (
-            <h3 className="mt-3 text-center ml-3"> LOADING </h3>
-          ) : (
-            <h3 className="mt-3 text-center ml-3"> UPDATE PASSWORD </h3>
-          )}
-          <form>
-            <div className="form-group">
-              <input
-                type="password"
-                className="form-control"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="New Password"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                className="form-control"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                placeholder="Confirm new Password"
-              />
-            </div>
-            <button
-              type="button"
-              disabled={
-                loading || password.length < 6 || passwordConfirm.length < 6
-              }
-              onClick={submitHandler}
-              className="btn btn-primary"
-            >
-              Submit
-            </button>
-          </form>
+        <div className="form-group">
+          <input
+            type="password"
+            className="form-control"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            placeholder="Confirm new Password"
+          />
         </div>
-      </div>
-    </div>
+        <button
+          type="button"
+          disabled={
+            loading || password.length < 6 || passwordConfirm.length < 6
+          }
+          onClick={submitHandler}
+          className="btn btn-primary"
+        >
+          Submit
+        </button>
+      </form>
+    </DashboardLayout>
   );
 };
 
