@@ -1,6 +1,6 @@
 import axios from 'axios';
 import firebase from 'firebase'
-const url = process.env.REACT_APP_API;
+import * as types from '../types'
 
 export const authLogin = (user, values) => async (dispatch) => {
   try {
@@ -10,7 +10,7 @@ export const authLogin = (user, values) => async (dispatch) => {
     });
 
     dispatch({
-      type: 'LOGGED_IN_USER',
+      type: types.LOGGED_IN_USER,
       payload: { user: res.data.data },
     });
   } catch (error) {
@@ -29,7 +29,7 @@ export const actualLogin = (user) => async (dispatch) => {
     console.log(res.data);
 
     dispatch({
-      type: 'LOGGED_IN_USER',
+      type: types.LOGGED_IN_USER,
       payload: { user: res.data.data },
     });
   } catch (error) {
@@ -43,7 +43,7 @@ export const logoutUser = () => async (dispatch) => {
    const {data} = await axios.get('/api/v1/auth/logout')
    console.log(data)
       dispatch({
-        type: 'LOGOUT_USER',
+        type: types.LOGOUT_USER,
         payload: null,
       });
   } catch (error) {
