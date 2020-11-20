@@ -18,7 +18,6 @@ const Slider = () => {
       onClick={(e) => setCurrent(e.key)}
       style={{ width: 256, borderColor: 'grey', height: '100vh' }}
       selectedKeys={[current]}
-      defaultSelectedKeys={[key]}
       defaultOpenKeys={['sub1', 'sub2', 'sub4']}
       mode="inline"
     >
