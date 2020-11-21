@@ -10,9 +10,10 @@ import {
 import { DeleteOutlined } from '@ant-design/icons';
 import MyModal from '../../Components/admin/NewCategoryModal';
 import UpdateModal from '../../Components/admin/UpdateCategoryModal';
+import LocalSearch from '../../Components/admin/LocalSearch';
 
 const Category = () => {
-  const [update, setUpdate] = useState(true)
+  const [keyword, setKeyword] = useState('');
   const category = useSelector((state) => state.category);
   const dispatch = useDispatch();
 
@@ -25,6 +26,7 @@ const Category = () => {
     }
     await dispatch(deleteCategory(category.slug, toast));
   };
+  const searcResults = (query) => (c) => c.name.toLowerCase().includes(query);
 
   useEffect(() => {
     dispatch(allCategories(toast));
@@ -53,39 +55,46 @@ const Category = () => {
         />
       </div>
       <br />
-      <h4 className="text-center"> All Categories </h4>
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered text-center table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">ID</th>
-              <th scope="col">Total Products</th>
-              <th scope="col">Name</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category, i) => (
-              <tr key={i}>
-                <th scope="row">{i + 1}</th>
-                <td>{category._id}</td>
-                <td> 25</td>
-                <td>{category.name}</td>
-                <td className="justify-content-around d-flex">
-                  <UpdateModal category={category} />
-                  <DeleteOutlined
-                    style={{ color: 'red', cursor: 'pointer' }}
-                    onClick={() => deleteC(category)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="row">
+      <div className="row mb-4">
         <MyModal />
+      </div>
+      <div className="row ml-2">
+        <div className="float-left form-group">
+          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+        </div>
+      </div>
+
+      <div className="table-responsive">
+        {categories.length > 0 && (
+          <table className="table table-striped table-bordered text-center table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Total Products</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.filter(searcResults(keyword)).map((category, i) => (
+                <tr key={i}>
+                  <th scope="row">{i + 1}</th>
+                  <td>{category._id}</td>
+                  <td> 25</td>
+                  <td>{category.name}</td>
+                  <td className="justify-content-around d-flex">
+                    <UpdateModal category={category} />
+                    <DeleteOutlined
+                      style={{ color: 'red', cursor: 'pointer' }}
+                      onClick={() => deleteC(category)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </DashboardLayout>
   );
