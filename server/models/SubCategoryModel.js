@@ -24,7 +24,7 @@ const subCategorySchema = new mongoose.Schema(
 );
 
 subCategorySchema.pre(/^find/, function (next) {
-  this.populate('parent', 'name slug');
+  this.populate('parent', 'name');
   next();
 });
 

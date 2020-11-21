@@ -16,7 +16,6 @@ exports.create = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No such category exists: ${req.params.slug}`)
     );
   }
-  console.log(category);
   const newSubcategory = await Subcategory.create({
     name,
     slug: slugify(name, { lower: true }),

@@ -16,7 +16,7 @@ exports.create = asyncHandler(async (req, res, next) => {
 });
 
 exports.getOne = asyncHandler(async (req, res, next) => {
-  const category = await Category.findById(req.params.id);
+  const category = await Category.findById(req.params.id).populate('children', 'name slug');
   if (!category) {
     return next(new ErrorResponse(`No category found`, 404));
   }
