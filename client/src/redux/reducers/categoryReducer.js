@@ -8,9 +8,19 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case types.ALL_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+        error: null,
+      };
     case types.NEW_CATEGORY:
-      return { ...state };
-
+      console.log(payload)
+      return {
+        ...state,
+        categories: [payload, ...state.categories],
+        error: null,
+      };
     default:
       return state;
   }

@@ -20,6 +20,8 @@ import WishList from './Pages/user/Wishlist';
 import MyOrders from './Pages/user/MyOrders';
 import PersonalInfo from './Pages/user/PersonalInfo';
 import AdminDashboard from './Pages/admin/AdminDashboard';
+import Category from './Pages/admin/Category';
+import SubCategory from './Pages/admin/SubCategory';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ const App = () => {
         <PrivateRoute path="/user/orders" exact component={MyOrders} />
         <PrivateRoute path="/user/info" exact component={PersonalInfo} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
+        <AdminRoute path="/admin/category" exact component={Category} />
+        <AdminRoute path="/admin/category/sub" exact component={SubCategory} />
       </Switch>
     </div>
   );

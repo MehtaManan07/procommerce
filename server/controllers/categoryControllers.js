@@ -4,6 +4,7 @@ const asyncHandler = require('../middlewares/async');
 const slugify = require('slugify');
 
 exports.create = asyncHandler(async (req, res, next) => {
+  console.log(req.body.name)
   const newCategory = await Category.create({
     name: req.body.name,
     slug: slugify(req.body.name, { lower: true }),

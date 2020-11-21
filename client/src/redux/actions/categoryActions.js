@@ -1,13 +1,17 @@
 import * as types from '../types';
 import axios from 'axios';
 
-export const newCategory = (name) => async (dispatch) => {
+export const newCategory = (name, toast) => async (dispatch) => {
+  console.log(name)
   try {
-    const { data } = await axios.post('/api/v1/category', name);
+    const { data } = await axios.post('/api/v1/category', {name});
     dispatch({ type: types.NEW_CATEGORY, payload: data.data });
+    dispatch(allCategories(toast))
     console.log(data);
+    if (data.success) toast.success(`Category ${data.data.name} added`);
   } catch (error) {
-    console.log(error.response);
+    toast.error(error.response.data.error)
+    console.log(error.response.data.error);
   }
 };
 
@@ -21,7 +25,7 @@ export const oneCategory = (slug) => async (dispatch) => {
   }
 };
 
-export const allCategories = () => async (dispatch) => {
+export const allCategories = (toast) => async (dispatch) => {
   try {
     const { data } = await axios.get(`/api/v1/category/`);
     dispatch({ type: types.ALL_CATEGORIES, payload: data.data });

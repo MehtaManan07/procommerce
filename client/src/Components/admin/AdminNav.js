@@ -11,7 +11,6 @@ import {
 
 const { SubMenu } = Menu;
 
-
 const AdminNav = () => {
   const history = useHistory();
   const handleClick = (e) => {
@@ -20,7 +19,7 @@ const AdminNav = () => {
   return (
     <Menu
       onClick={handleClick}
-      style={{ width: 256, borderColor: 'grey', height: '100vh' }}
+      style={{ width: 256, borderColor: 'grey' }}
       defaultSelectedKeys={['0771']}
       defaultOpenKeys={['sub1', 'sub2', 'sub3']}
       mode="inline"
@@ -29,24 +28,51 @@ const AdminNav = () => {
         Dashboard
       </Menu.Item>
       <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Orders">
-        <Menu.Item icon={<BarChartOutlined />} onClick={() => history.push('/admin/orders/analytics')} key="analytics1">
+        <Menu.Item
+          icon={<BarChartOutlined />}
+          onClick={() => history.push('/admin/orders/analytics')}
+          key="analytics1"
+        >
           Analytics
         </Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/orders/all')} key="allOrders">
+        <Menu.Item
+          icon={<MinusOutlined />}
+          onClick={() => history.push('/admin/orders/all')}
+          key="allOrders"
+        >
           All Orders
         </Menu.Item>
       </SubMenu>
       <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Categories">
-        <Menu.Item icon={<BarChartOutlined />} onClick={() => history.push('/admin/category/analytics')} key="analytics2">
+        <Menu.Item
+          icon={<BarChartOutlined />}
+          onClick={() => history.push('/admin/category/analytics')}
+          key="analytics2"
+        >
           Analytics
         </Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/category')} key="category">
+        <Menu.Item
+          icon={<MinusOutlined />}
+          onClick={() => history.push('/admin/category')}
+          key="category"
+        >
           Categories
         </Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} onClick={() => history.push('/admin/category/sub')} key="sub">
-         Sub Categories
+        <Menu.Item
+          icon={<MinusOutlined />}
+          onClick={() => history.push('/admin/category/sub')}
+          key="sub"
+        >
+          Sub Categories
         </Menu.Item>
       </SubMenu>
+      <Menu.Item
+        icon={<ScissorOutlined />}
+        onClick={() => history.push('/admin/coupons')}
+        key="0771"
+      >
+        Coupons
+      </Menu.Item>
       <SubMenu
         key="sub3"
         title={
@@ -56,18 +82,19 @@ const AdminNav = () => {
           </span>
         }
       >
-        <Menu.Item icon={<BarChartOutlined />} key="analytics3">Analytics</Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} key="allProd">All products</Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} key="newProd">Create Product</Menu.Item>
-        <Menu.Item icon={<MinusOutlined />} key="Best">Best sellers</Menu.Item>
+        <Menu.Item icon={<BarChartOutlined />} key="analytics3">
+          Analytics
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="allProd">
+          All products
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="newProd">
+          Create Product
+        </Menu.Item>
+        <Menu.Item icon={<MinusOutlined />} key="Best">
+          Best sellers
+        </Menu.Item>
       </SubMenu>
-      <Menu.Item
-        icon={<ScissorOutlined />}
-        onClick={() => history.push('/admin/coupons')}
-        key="0771"
-      >
-        Coupons
-      </Menu.Item>
     </Menu>
   );
 };
