@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const categorySchema = new mongoose.Schema(
+const subCategorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -14,16 +14,19 @@ const categorySchema = new mongoose.Schema(
       lowercase: true,
       index: true,
     },
+    parent: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Category',
+      required: [true, 'Parent category is required!!'],
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// Virtual populate
-categorySchema.virtual('children', {
-  ref: 'Subcategory',
-  foreignField: 'parent',
-  localField: '_id',
+subCategorySchema.pre(/^find/, function (next) {
+  this.populate('parent', 'name slug');
+  next();
 });
 
-const Category = mongoose.model('Category', categorySchema);
-module.exports = Category;
+const Subcategory = mongoose.model('Subcategory', subCategorySchema);
+module.exports = Subcategory;

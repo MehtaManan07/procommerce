@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import { newCategory } from '../../redux/actions/categoryActions';
 import { useDispatch } from 'react-redux';
-import { EditFilled } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 
-const MyModal = ({ className }) => {
+const MyModal = () => {
   const [visible, setVisible] = useState(false); // for new category
   const [name, setName] = useState('');
   const dispatch = useDispatch();

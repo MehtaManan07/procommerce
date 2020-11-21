@@ -4,7 +4,7 @@ const asyncHandler = require('../middlewares/async');
 const slugify = require('slugify');
 
 exports.create = asyncHandler(async (req, res, next) => {
-  console.log(req.body.name)
+  console.log(req.body.name);
   const newCategory = await Category.create({
     name: req.body.name,
     slug: slugify(req.body.name, { lower: true }),
@@ -16,7 +16,7 @@ exports.create = asyncHandler(async (req, res, next) => {
 });
 
 exports.getOne = asyncHandler(async (req, res, next) => {
-  const category = await Category.findOne({ slug: req.params.slug });
+  const category = await Category.findById(req.params.id);
   if (!category) {
     return next(new ErrorResponse(`No category found`, 404));
   }
@@ -24,7 +24,9 @@ exports.getOne = asyncHandler(async (req, res, next) => {
 });
 
 exports.getAll = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find({}).sort({ createdAt: -1 });
+  const categories = await Category.find({})
+    .sort({ createdAt: -1 })
+    .populate('children');
   if (!categories) {
     return next(new ErrorResponse(`No categories found`, 404));
   }
@@ -34,12 +36,12 @@ exports.getAll = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateOne = asyncHandler(async (req, res, next) => {
-  const category = await Category.findOne({ slug: req.params.slug });
+  const category = await Category.findById(req.params.id);
   if (!category) {
     return next(new ErrorResponse(`No category found`, 404));
   }
-  const categoryNew = await Category.findOneAndUpdate(
-    { slug: req.params.slug },
+  const categoryNew = await Category.findByIdAndUpdate(
+    req.params.id,
     { name: req.body.name, slug: slugify(req.body.name, { lower: true }) },
     { new: true }
   );
@@ -47,7 +49,7 @@ exports.updateOne = asyncHandler(async (req, res, next) => {
 });
 
 exports.deleteOne = asyncHandler(async (req, res, next) => {
-  const category = await Category.findOne({ slug: req.params.slug });
+  const category = await Category.findById(req.params.id);
   if (!category) {
     return next(new ErrorResponse(`No category found`, 404));
   }

@@ -12,7 +12,7 @@ const UpdateModal = ({ category }) => {
 
   const handleOk = async (e) => {
     e.preventDefault();
-    dispatch(updateCategory(name, toast, category.slug));
+    dispatch(updateCategory(name, toast, category.id));
     setVisible(false);
     setName('');
   };

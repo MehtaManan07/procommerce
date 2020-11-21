@@ -24,7 +24,7 @@ const Category = () => {
     if (!a) {
       return;
     }
-    await dispatch(deleteCategory(category.slug, toast));
+    await dispatch(deleteCategory(category.id, toast));
   };
   const searcResults = (query) => (c) => c.name.toLowerCase().includes(query);
 

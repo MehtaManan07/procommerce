@@ -32,6 +32,7 @@ connectDB();
 // 3) ROUTES
 app.use('/api/v1/auth', require('./server/routes/authRoutes'));
 app.use('/api/v1/category', require('./server/routes/categoryRoutes'));
+app.use('/api/v1/subcategory', require('./server/routes/subcategoryRoutes'))
 
 app.all('*', (req, res, next) => {
   next(new ErrorResponse(` Can't find ${req.originalUrl} on this server`, 404));

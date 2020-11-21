@@ -15,10 +15,10 @@ export const newCategory = (name, toast) => async (dispatch) => {
   }
 };
 
-export const updateCategory = (name, toast, slug) => async (dispatch) => {
+export const updateCategory = (name, toast, id) => async (dispatch) => {
   console.log(name);
   try {
-    const { data } = await axios.put(`/api/v1/category/${slug}`, { name });
+    const { data } = await axios.put(`/api/v1/category/${id}`, { name });
     dispatch({ type: types.UPDATE_CATEGORY, payload: data.data });
     dispatch(allCategories(toast));
     console.log(data);
@@ -29,9 +29,9 @@ export const updateCategory = (name, toast, slug) => async (dispatch) => {
   }
 };
 
-export const oneCategory = (slug) => async (dispatch) => {
+export const oneCategory = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/api/v1/category/${slug}`);
+    const { data } = await axios.get(`/api/v1/category/${id}`);
     dispatch({ type: types.ONE_CATEGORY, payload: data.data });
     console.log(data);
   } catch (error) {
@@ -49,9 +49,9 @@ export const allCategories = (toast) => async (dispatch) => {
   }
 };
 
-export const deleteCategory = (slug, toast) => async (dispatch) => {
+export const deleteCategory = (id, toast) => async (dispatch) => {
   try {
-    const { data } = await axios.delete(`/api/v1/category/${slug}`);
+    const { data } = await axios.delete(`/api/v1/category/${id}`);
     dispatch({ type: types.DELETE_CATEGORY, payload: data.data });
     toast.warning(`Category deleted successfully`);
     console.log(data);
