@@ -37,7 +37,11 @@ const App = () => {
   }, []);
   return (
     <div>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer
+        autoClose={3000}
+        position="bottom-center"
+        hideProgressBar
+      />
       <Navbar />
       <Switch>
         <Route path="/" exact component={HomePage} />

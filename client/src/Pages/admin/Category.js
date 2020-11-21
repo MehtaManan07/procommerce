@@ -3,7 +3,10 @@ import DashboardLayout from '../../Components/core/DashboardLayout';
 import { toast } from 'react-toastify';
 import DisplayCard from '../../Components/admin/DisplayCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { allCategories, deleteCategory } from '../../redux/actions/categoryActions';
+import {
+  allCategories,
+  deleteCategory,
+} from '../../redux/actions/categoryActions';
 import { EditFilled, DeleteOutlined } from '@ant-design/icons';
 import MyModal from '../../Components/admin/NewCategoryModal';
 
@@ -11,14 +14,14 @@ const Category = () => {
   const category = useSelector((state) => state.category);
   const dispatch = useDispatch();
 
-  const { categories } = category
+  const { categories } = category;
 
   const deleteC = async (category) => {
-    const a = window.confirm(`Are you sure?`);
+    const a = window.confirm(`Are you sure? This cannot be undone`);
     if (!a) {
       return;
     }
-    await dispatch(deleteCategory(category.slug,toast))
+    await dispatch(deleteCategory(category.slug, toast));
   };
 
   useEffect(() => {
@@ -50,11 +53,12 @@ const Category = () => {
       <br />
       <h4 className="text-center"> All Categories </h4>
       <div className="table-responsive">
-        <table className="table table-striped table-bordered table-hover">
+        <table className="table table-striped table-bordered text-center table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">ID</th>
+              <th scope="col">Total Products</th>
               <th scope="col">Name</th>
               <th scope="col">Actions</th>
             </tr>
@@ -64,6 +68,7 @@ const Category = () => {
               <tr key={i}>
                 <th scope="row">{i + 1}</th>
                 <td>{category._id}</td>
+                <td> 25</td>
                 <td>{category.name}</td>
                 <td className="justify-content-around d-flex">
                   <EditFilled style={{ color: 'red', cursor: 'pointer' }} />
