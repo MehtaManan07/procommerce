@@ -20,7 +20,7 @@ const AdminNav = () => {
     <Menu
       onClick={handleClick}
       style={{ width: 256, borderColor: 'grey' }}
-      defaultSelectedKeys={['0771']}
+      defaultSelectedKeys={['dash']}
       defaultOpenKeys={['sub1', 'sub2', 'sub3']}
       mode="inline"
     >
@@ -69,7 +69,7 @@ const AdminNav = () => {
       <Menu.Item
         icon={<ScissorOutlined />}
         onClick={() => history.push('/admin/coupons')}
-        key="0771"
+        key="coupons"
       >
         Coupons
       </Menu.Item>

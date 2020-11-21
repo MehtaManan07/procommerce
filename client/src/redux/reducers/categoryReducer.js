@@ -21,6 +21,12 @@ export default (state = initialState, { type, payload }) => {
         categories: [payload, ...state.categories],
         error: null,
       };
+    
+    case types.DELETE_CATEGORY:
+      return {
+        ...state,
+        categories: state.categories.filter(category => category.id !== payload._id)
+      }
     default:
       return state;
   }

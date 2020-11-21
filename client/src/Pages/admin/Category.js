@@ -3,7 +3,7 @@ import DashboardLayout from '../../Components/core/DashboardLayout';
 import { toast } from 'react-toastify';
 import DisplayCard from '../../Components/admin/DisplayCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { allCategories } from '../../redux/actions/categoryActions';
+import { allCategories, deleteCategory } from '../../redux/actions/categoryActions';
 import { EditFilled, DeleteOutlined } from '@ant-design/icons';
 import MyModal from '../../Components/admin/NewCategoryModal';
 
@@ -13,11 +13,12 @@ const Category = () => {
 
   const { categories } = category
 
-  const deleteCategory = () => {
+  const deleteC = async (category) => {
     const a = window.confirm(`Are you sure?`);
     if (!a) {
       return;
     }
+    await dispatch(deleteCategory(category.slug,toast))
   };
 
   useEffect(() => {
@@ -68,7 +69,7 @@ const Category = () => {
                   <EditFilled style={{ color: 'red', cursor: 'pointer' }} />
                   <DeleteOutlined
                     style={{ color: 'red', cursor: 'pointer' }}
-                    onClick={deleteCategory}
+                    onClick={() => deleteC(category)}
                   />
                 </td>
               </tr>

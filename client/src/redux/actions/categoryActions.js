@@ -34,3 +34,14 @@ export const allCategories = (toast) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const deleteCategory = (slug,toast) => async (dispatch) => {
+  try {
+    const { data } = await axios.delete(`/api/v1/category/${slug}`);
+    dispatch({ type: types.DELETE_CATEGORY, payload: data.data });
+    toast.warning(`Category deleted successfully`)
+    console.log(data);
+  } catch (error) {
+    console.log(error.response);
+  }
+};
