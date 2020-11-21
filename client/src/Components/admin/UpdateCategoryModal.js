@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
-import { newCategory } from '../../redux/actions/categoryActions';
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'antd';
+import { updateCategory } from '../../redux/actions/categoryActions';
 import { useDispatch } from 'react-redux';
-import {EditFilled} from '@ant-design/icons'
+import { EditFilled } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 
-const MyModal = ({ update }) => {
-  const [visible, setVisible] = useState(false); // for new category 
+const UpdateModal = ({ category }) => {
+  const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
 
   const handleOk = async (e) => {
     e.preventDefault();
-    dispatch(newCategory(name, toast));
+    dispatch(updateCategory(name, toast, category.slug));
     setVisible(false);
     setName('');
   };
 
+  useEffect(() => {
+    setName(category.name);
+  }, []);
+
   return (
     <>
-      {!update ? (
-        <Button
-          className="w-50 mx-auto"
-          type="primary"
-          onClick={() => setVisible(true)}
-        >
-          Add new Category
-        </Button>
-      ) : (
-        <EditFilled style={{ color: 'red', cursor: 'pointer' }} />
-      )}
+      <EditFilled
+        onClick={() => setVisible(true)}
+        style={{ color: 'blue', cursor: 'pointer' }}
+      />
       <Modal
-        title="New category"
+        title="Update category"
         visible={visible}
         onOk={handleOk}
         onCancel={() => setVisible(false)}
@@ -51,4 +48,4 @@ const MyModal = ({ update }) => {
   );
 };
 
-export default MyModal;
+export default UpdateModal;

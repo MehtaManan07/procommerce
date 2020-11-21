@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardLayout from '../../Components/core/DashboardLayout';
 import { toast } from 'react-toastify';
 import DisplayCard from '../../Components/admin/DisplayCard';
@@ -7,10 +7,12 @@ import {
   allCategories,
   deleteCategory,
 } from '../../redux/actions/categoryActions';
-import { EditFilled, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import MyModal from '../../Components/admin/NewCategoryModal';
+import UpdateModal from '../../Components/admin/UpdateCategoryModal';
 
 const Category = () => {
+  const [update, setUpdate] = useState(true)
   const category = useSelector((state) => state.category);
   const dispatch = useDispatch();
 
@@ -71,7 +73,7 @@ const Category = () => {
                 <td> 25</td>
                 <td>{category.name}</td>
                 <td className="justify-content-around d-flex">
-                  <EditFilled style={{ color: 'red', cursor: 'pointer' }} />
+                  <UpdateModal category={category} />
                   <DeleteOutlined
                     style={{ color: 'red', cursor: 'pointer' }}
                     onClick={() => deleteC(category)}

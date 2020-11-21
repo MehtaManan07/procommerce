@@ -2,15 +2,29 @@ import * as types from '../types';
 import axios from 'axios';
 
 export const newCategory = (name, toast) => async (dispatch) => {
-  console.log(name)
+  console.log(name);
   try {
-    const { data } = await axios.post('/api/v1/category', {name});
+    const { data } = await axios.post('/api/v1/category', { name });
     dispatch({ type: types.NEW_CATEGORY, payload: data.data });
-    dispatch(allCategories(toast))
+    dispatch(allCategories(toast));
     console.log(data);
     if (data.success) toast.success(`Category ${data.data.name} added`);
   } catch (error) {
-    toast.error(error.response.data.error)
+    toast.error(error.response.data.error);
+    console.log(error.response.data.error);
+  }
+};
+
+export const updateCategory = (name, toast, slug) => async (dispatch) => {
+  console.log(name);
+  try {
+    const { data } = await axios.put(`/api/v1/category/${slug}`, { name });
+    dispatch({ type: types.UPDATE_CATEGORY, payload: data.data });
+    dispatch(allCategories(toast));
+    console.log(data);
+    if (data.success) toast.success(`Updated successfully`);
+  } catch (error) {
+    toast.error(error.response.data.error);
     console.log(error.response.data.error);
   }
 };
@@ -35,11 +49,11 @@ export const allCategories = (toast) => async (dispatch) => {
   }
 };
 
-export const deleteCategory = (slug,toast) => async (dispatch) => {
+export const deleteCategory = (slug, toast) => async (dispatch) => {
   try {
     const { data } = await axios.delete(`/api/v1/category/${slug}`);
     dispatch({ type: types.DELETE_CATEGORY, payload: data.data });
-    toast.warning(`Category deleted successfully`)
+    toast.warning(`Category deleted successfully`);
     console.log(data);
   } catch (error) {
     console.log(error.response);
