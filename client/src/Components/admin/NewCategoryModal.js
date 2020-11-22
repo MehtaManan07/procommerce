@@ -3,8 +3,9 @@ import { Modal, Button } from 'antd';
 import { newCategory } from '../../redux/actions/categoryActions';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import SelectField from './Select';
 
-const MyModal = () => {
+const MyModal = ({ sub = false }) => {
   const [visible, setVisible] = useState(false); // for new category
   const [name, setName] = useState('');
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const MyModal = () => {
             className="form-control"
             placeholder="Category Name"
           />
+          {sub && <SelectField />}
         </div>
       </Modal>
     </>

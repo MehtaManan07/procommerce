@@ -71,6 +71,7 @@ const Category = () => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
+                <th scope="col">Total Sub categories</th>
                 <th scope="col">Total Products</th>
                 <th scope="col">Name</th>
                 <th scope="col">Actions</th>
@@ -81,6 +82,7 @@ const Category = () => {
                 <tr key={i}>
                   <th scope="row">{i + 1}</th>
                   <td>{category._id}</td>
+                  <td> {category.children.length}</td>
                   <td> 25</td>
                   <td>{category.name}</td>
                   <td className="justify-content-around d-flex">
