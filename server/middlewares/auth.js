@@ -26,7 +26,7 @@ exports.authCheck = asyncHandler(async (req, res, next) => {
   } catch (error) {
     console.log(error.message);
     return next(
-      new ErrorResponse('Not authorized to access the resource', 401)
+      new ErrorResponse('Not authorized to access the resource, please login', 401)
     );
   }
 });

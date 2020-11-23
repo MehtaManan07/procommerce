@@ -5,7 +5,7 @@ const subCategorySchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: [true, 'Category must have a name'],
+      required: [true, 'Failed! Category must have a name'],
       maxlength: [20, 'Category name should be less than 20 characters'],
     },
     slug: {

@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'antd';
-import { updateCategory } from '../../redux/actions/categoryActions';
+import {
+  updateCategory,
+  updateSubCategory,
+} from '../../redux/actions/categoryActions';
 import { useDispatch } from 'react-redux';
 import { EditFilled } from '@ant-design/icons';
 import { toast } from 'react-toastify';
 
-const UpdateModal = ({ category }) => {
+const UpdateModal = ({ category, sub }) => {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
 
   const handleOk = async (e) => {
     e.preventDefault();
-    dispatch(updateCategory(name, toast, category.id));
+    !sub
+      ? dispatch(updateCategory(name, toast, category.id))
+      : dispatch(updateSubCategory(name, toast, category.id));
     setVisible(false);
     setName('');
   };

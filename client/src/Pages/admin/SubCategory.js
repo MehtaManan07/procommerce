@@ -71,20 +71,20 @@ const SubCategory = () => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
-                <th scope="col">Total Products</th>
-                <th scope="col">Parent category</th>
                 <th scope="col">Name</th>
+                <th scope="col">Parent category</th>
+                <th scope="col">Total Products</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               {subcategories.filter(searcResults(keyword)).map((category, i) => (
                 <tr key={i}>
-                  <th scope="row">{i + 1}</th>
+                  <th scope="row">{i + 1}</th>  
                   <td>{category._id}</td>
-                  <td> {category.children.length}</td>
-                  <td> 25</td>
                   <td>{category.name}</td>
+                  <td> {category.parent.name}</td>
+                  <td> 25</td>
                   <td className="justify-content-around d-flex">
                     <UpdateModal sub category={category} />
                     <DeleteOutlined

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
-import { newCategory } from '../../redux/actions/categoryActions';
+import {
+  newCategory,
+  newSubCategory,
+} from '../../redux/actions/categoryActions';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import SelectField from './Select';
@@ -8,11 +11,20 @@ import SelectField from './Select';
 const MyModal = ({ sub = false }) => {
   const [visible, setVisible] = useState(false); // for new category
   const [name, setName] = useState('');
+  const [category, setCategory] = useState(''); // parent for subcategory
   const dispatch = useDispatch();
 
+  console.log(category)
+
   const handleOk = async (e) => {
+    if(category === 'none'){
+      toast.error('Please select a parent category')
+      return;
+    }
     e.preventDefault();
-    dispatch(newCategory(name, toast));
+    !sub
+      ? dispatch(newCategory(name, toast))
+      : dispatch(newSubCategory(name, category, toast));
     setVisible(false);
     setName('');
   };
@@ -24,7 +36,7 @@ const MyModal = ({ sub = false }) => {
         type="primary"
         onClick={() => setVisible(true)}
       >
-        Add new Category
+        {sub ? 'Add new sub Category' : 'Add new Category'}
       </Button>
       <Modal
         title="New category"
@@ -41,7 +53,7 @@ const MyModal = ({ sub = false }) => {
             className="form-control"
             placeholder="Category Name"
           />
-          {sub && <SelectField />}
+          {sub && <SelectField sub setCategory={setCategory} />}
         </div>
       </Modal>
     </>

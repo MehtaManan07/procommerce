@@ -7,7 +7,7 @@ import {
   allCategories,
   deleteCategory,
 } from '../../redux/actions/categoryActions';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import MyModal from '../../Components/admin/NewCategoryModal';
 import UpdateModal from '../../Components/admin/UpdateCategoryModal';
 import LocalSearch from '../../Components/admin/LocalSearch';
@@ -82,7 +82,7 @@ const Category = () => {
                 <tr key={i}>
                   <th scope="row">{i + 1}</th>
                   <td>{category._id}</td>
-                  <td> {category.children.length}</td>
+                  <td>{category.children.length} </td>
                   <td> 25</td>
                   <td>{category.name}</td>
                   <td className="justify-content-around d-flex">

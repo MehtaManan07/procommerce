@@ -20,7 +20,7 @@ export const newSubCategory = (name, id, toast) => async (dispatch) => {
   try {
     const { data } = await axios.post(`/api/v1/category/${id}/subcategory`, { name });
     dispatch({ type: types.NEW_SUBCATEGORY, payload: data.data });
-    dispatch(allCategories(toast));
+    dispatch(allSubCategories(toast));
     console.log(data);
     if (data.success) toast.success(`Category ${data.data.name} added`);
   } catch (error) {
@@ -48,7 +48,7 @@ export const updateSubCategory = (name, toast, id) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/v1/subcategory/${id}`, { name });
     dispatch({ type: types.UPDATE_SUBCATEGORY, payload: data.data });
-    dispatch(allCategories(toast));
+    dispatch(allSubCategories(toast));
     console.log(data);
     if (data.success) toast.success(`Updated successfully`);
   } catch (error) {
